@@ -6,7 +6,7 @@ const poundToKg = 2.20462
 const feetToMeters = 3.28084
 
 let inputFieldMeters = document.createElement("input")
-inputFieldMeters.setAttribute("type", "number")
+inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
 inputFieldMeters.setAttribute("name", "heightInCm")
 inputFieldMeters.setAttribute("id", "heightInCm")
@@ -56,12 +56,16 @@ For men: 10 x weight (kg) + 6.25 x height (cm) – 5 x age (y) + 5 (kcal / day)
 For women: 10 x weight (kg) + 6.25 x height (cm) – 5 x age (y) -161 (kcal / day)
     */
     let weight = document.getElementById("weight").value
-    console.log(weight)
+    let weightVal
+    let isNum = /^\d+$/.test(weight)
+    if(isNum) {
+        weightVal = parseFloat(weight)
+    }
     weightChoices.forEach((btn) => {
         btn.addEventListener('change', () => {
             let selected = document.querySelector(".weight .weight-choice input[name='weightChoice']:checked").id
             if(!(selected == "weightChoiceKG")) {
-                weight /= poundToKg
+                weightVal /= poundToKg
             }
         })
     })
