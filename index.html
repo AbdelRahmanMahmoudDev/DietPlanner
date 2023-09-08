@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Diet Planner</title>
+        <!-- Roboto (Google Fonts) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="css/all.min.css">
+        <!-- Normalize css -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <!-- master -->
+        <link rel="stylesheet" href="css/master.css">
+    </head>
+    <body>
+        <!-- start header -->
+        <div class="header">
+            <div class="container">
+                <h1>diet planner</h1>
+            </div>
+        </div>
+        <!-- end header -->
+        <!-- start Questionnaire -->
+        <div class="questionnaire">
+            <form action="GET">
+                <div class="weight-section section">
+                    <div class="weight">
+                        <label for="weight">Weight</label><br>
+                        <input type="number" required name="weight" id="weight">
+                    </div>
+                    <div class="weight-choice">
+                        <fieldset>
+                            <label for="weightChoiceKG">kgs</label>
+                            <input type="radio" name="weightChoice" checked id="weightChoiceKG">
+                            <label for="weightChoicPounds">pounds</label>
+                            <input type="radio" name="weightChoice" id="weightChoicPounds">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="height-section section">
+                    <div class="height">
+                        <label><!--Height<br>-->
+                            <!-- <input type="number" required name="heightInCm" id="heightInCm"> -->
+                        </label><br>
+                        
+                    </div>
+                    <div class="height-choice">
+                        <fieldset>
+                            <label for="heightChoiceMeters">cm</label>
+                            <input type="radio" name="heightChoice" checked id="heightChoiceMeters">
+                            <label for="heightChoiceFeet">Feet | Inches</label>
+                            <input type="radio" name="heightChoice" id="heightChoiceFeet">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="age-section section">
+                    <label for="age">Age</label><br>
+                    <input type="number" required name="age" id="age">
+                </div>
+                <div class="gender-section section">
+                    <div class="gender-choice">
+                        <fieldset>
+                            <legend>Gender</legend>
+                            <label for="genderChoiceMale">Male</label>
+                            <input type="radio" checked name="genderChoice" id="genderChoiceMale">
+                            <label for="genderChoiceFemale">Female</label>
+                            <input type="radio" name="genderChoice" id="genderChoiceFemale">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="activity-section section">
+                    <fieldset>
+                        <legend>Choose your activity level</legend>
+                        <label for="sedentary">sedentary(No activity)</label>
+                        <input type="radio" name="activityLevel" id="sedentary"><br>
+                        <label for="lightlyActive">Lightly Active (1 - 2 Days)</label>
+                        <input type="radio" name="activityLevel" checked id="lightlyActive"><br>
+                        <label for="moderatelyActive">Moderately Active (3 - 5 Days)</label>
+                        <input type="radio" name="activityLevel" id="moderatelyActive"><br>
+                        <label for="veryActive">Very Active (6 - 7 Days)</label>
+                        <input type="radio" name="activityLevel" id="veryActive"><br>
+                        <label for="extraActive">Extra Active (2x per day)</label>
+                        <input type="radio" name="activityLevel" id="extraActive"><br>
+                        <div class="activity-choice">
+                    </fieldset>
+                </div>
+                <div class="goal-section section">
+                    <fieldset>
+                        <legend>Choose your goal</legend>
+                        <label for="loseWeight">Lose Weight</label>
+                        <input type="radio" name="goalChoice" checked id="loseWeight"><br>
+                        <label for="maintainWeight">Maintain Weight</label>
+                        <input type="radio" name="goalChoice" id="maintainWeight"><br>
+                        <label for="gainWeight">Gain Weight</label>
+                        <input type="radio" name="goalChoice" id="gainWeight"><br>
+                    </fieldset>
+                </div>
+                <input type="submit" value="Let's go!">
+                </form>
+        </div>
+        </div>
+        <!-- End Questionnaire -->
+        <!-- Font Awesome -->
+        <script src="js/all.min.js"></script>
+        <!-- main -->
+        <script src="js/main.js"></script>
+    </body>
+</html>
