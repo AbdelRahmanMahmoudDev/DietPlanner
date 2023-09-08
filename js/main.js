@@ -1,6 +1,7 @@
-let weightChoice = document.getElementById("weightChoiceKG")
+let weightChoices = document.querySelectorAll(".weight .weight-choice input[name='weightChoice']")
 let heightChoices = document.querySelectorAll(".height-section input[name='heightChoice']")
 let heightInputSection = document.querySelector(".height-section .height label")
+
 const poundToKg = 2.20462
 const feetToMeters = 3.28084
 
@@ -54,12 +55,16 @@ Calculate basal metabolic rate (BMR), or the calories your body burns simply by 
 For men: 10 x weight (kg) + 6.25 x height (cm) – 5 x age (y) + 5 (kcal / day)
 For women: 10 x weight (kg) + 6.25 x height (cm) – 5 x age (y) -161 (kcal / day)
     */
-    let weight = document.getElementById("weight")
-    let height = document.getElementById("height")
-    let age    = document.getElementById("age")
-    if(!weightChoice.getAttribute("checked")) {
-        weight /= poundToKg;
-    }
+    let weight = document.getElementById("weight").value
+    console.log(weight)
+    weightChoices.forEach((btn) => {
+        btn.addEventListener('change', () => {
+            let selected = document.querySelector(".weight .weight-choice input[name='weightChoice']:checked").id
+            if(!(selected == "weightChoiceKG")) {
+                weight /= poundToKg
+            }
+        })
+    })
     // We don't need to store this data
     e.preventDefault();
 }
