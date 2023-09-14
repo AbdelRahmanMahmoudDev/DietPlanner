@@ -10,7 +10,7 @@ inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
 inputFieldMeters.setAttribute("name", "heightInCm")
 inputFieldMeters.setAttribute("id", "heightInCm")
-inputFieldMeters.setAttribute("placeholder", "Height in CM")
+inputFieldMeters.setAttribute("placeholder", "Your height")
 heightInputSection.appendChild(inputFieldMeters) // default 
 
 let inputContainerFeet = document.createElement("div")
@@ -21,6 +21,7 @@ inputFieldFeet.setAttribute("required", "")
 inputFieldFeet.setAttribute("name", "heightPartFeet")
 inputFieldFeet.setAttribute("id", "heightPartFeet")
 inputFieldFeet.setAttribute("placeholder", "Feet")
+inputFieldFeet.style.marginRight = "10px";
 inputContainerFeet.appendChild(inputFieldFeet)
 
 let inputFieldInches = document.createElement("input")
