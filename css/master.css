@@ -1,4 +1,12 @@
 /* Start global values */
+:root {
+    --background-color: #abd1c6;
+    --headline-color: #fffffe;
+    --paragraph-color: #e8e4e6;
+    --form-button-color: #f9bc60;
+    --form-button-text: #001e1d;
+    --card-background: #004643;
+}
 * {
     box-sizing: border-box;
 }
@@ -7,6 +15,7 @@ html {
 }
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
 }
 .container {
     margin-left: auto;
@@ -52,45 +61,49 @@ body {
 }
 fieldset {
     border: none;
-    line-height: 1.4rem;
+    line-height: 1.2rem;
+    padding-left: 0;
 }
 /* end global values */
 /* start components */
-.section {
-    margin-bottom: 10px
-}
 /* end components */
 /* start header */
-.header {
-    background-color: #F4F2DE;
-}
 .header h1 {
     margin: 0;
     padding: 10px;
     text-align: center;
     text-transform: capitalize;
     font-size: 4rem;
-    color: #7C9D96;
+    color: var(--headline-color);
 }
 /* end header */
 /* start questionnaire */
 .questionnaire {
     height: calc(100vh);
-    background-color: #A1CCD1;
-    position: relative;
+    display: flex;
+    justify-content: center;
 }
 .questionnaire form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    border: 2px solid black;
-    border-radius: 5%;
     padding: 20px;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
+    color: var(--form-button-text);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.questionnaire form input {
+    background-color: var(--card-background);
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    color: #fffffe
+}
+.questionnaire form input::placeholder {
+    color: #fffffe81;
+}
+
+.questionnaire form input[type="submit"] {
+    background-color: var(--form-button-color);
+    border: none;
+    padding: 20px 40px;
+    color: var(--form-button-text);
 }
 /* end questionnaire */
