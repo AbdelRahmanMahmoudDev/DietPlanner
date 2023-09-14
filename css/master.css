@@ -75,12 +75,13 @@ fieldset {
 /* end header */
 /* start questionnaire */
 .questionnaire {
-    height: calc(100vh - 93.6px);
+    height: calc(100vh);
     background-color: #A1CCD1;
+    position: relative;
 }
 .questionnaire form {
     position: absolute;
-    top: 57%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
