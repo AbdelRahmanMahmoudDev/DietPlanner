@@ -1,6 +1,6 @@
 let weightChoices = document.querySelectorAll(".weight .weight-choice input[name='weightChoice']")
 let heightChoices = document.querySelectorAll(".height-section input[name='heightChoice']")
-let heightInputSection = document.querySelector(".height-section .height label")
+let heightInputSection = document.getElementById("heightDynamicInput");
 
 const poundToKg = 2.20462
 const feetToMeters = 3.28084
@@ -9,8 +9,10 @@ let inputFieldMeters = document.createElement("input")
 inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
 inputFieldMeters.setAttribute("name", "heightInCm")
-inputFieldMeters.setAttribute("id", "heightInCm")
+inputFieldMeters.setAttribute("id", "height")
 inputFieldMeters.setAttribute("placeholder", "Your height")
+inputFieldMeters.style.display = "block"
+
 heightInputSection.appendChild(inputFieldMeters) // default 
 
 let inputContainerFeet = document.createElement("div")
@@ -19,9 +21,10 @@ let inputFieldFeet = document.createElement("input")
 inputFieldFeet.setAttribute("type", "number")
 inputFieldFeet.setAttribute("required", "")
 inputFieldFeet.setAttribute("name", "heightPartFeet")
-inputFieldFeet.setAttribute("id", "heightPartFeet")
+inputFieldFeet.setAttribute("id", "height")
 inputFieldFeet.setAttribute("placeholder", "Feet")
 inputFieldFeet.style.marginRight = "10px";
+inputFieldFeet.style.marginBottom = "10px";
 inputContainerFeet.appendChild(inputFieldFeet)
 
 let inputFieldInches = document.createElement("input")
