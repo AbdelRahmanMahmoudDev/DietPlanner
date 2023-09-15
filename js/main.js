@@ -7,6 +7,33 @@ const poundToKg = 2.20462
 const feetToCentiMeters = 30.48
 const inchToCentiMeters = 2.54
 
+const genderChoices = {
+    male: "genderChoiceMale",
+    maleMathVal: 5,
+    female: "genderChoiceFemale",
+    femaleMathVal: -161
+}
+
+const activityLevelChoices = {
+    sedentary: "sedentary",
+    sedentaryLevel: 1.2,
+    lightlyActive: "lightlyActive",
+    lightlyActiveLevel: 1.375,
+    moderatelyActive: "moderatelyActive",
+    moderatelyActiveLevel: 1.550,
+    veryActive: "veryActive",
+    veryActiveLevel: 1.725,
+    extraActive: "extraActive",
+    extraActiveLevel: 1.9
+}
+
+const goalChoices = {
+    loseWeight: "loseWeight",
+    caloricDeficitFactor: 0.8,
+    gainWeight: "gainWeight",
+    caloricSurplusValue: 500
+}
+
 let inputFieldMeters = document.createElement("input")
 inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
@@ -91,40 +118,45 @@ document.forms[0].onsubmit = (e) => {
     console.log(`Weight: ${weightVal}\n Height: ${heightVal}\n Age: ${ageVal}\n`)
     let basalMetabolicRate = (10 * weightVal) + (6.25 * heightVal) - (5 * ageVal) 
 
+
+
     const genderSelected = document.querySelector("input[name='genderChoice']:checked").id
-    if(genderSelected == "genderChoiceMale") {
-        basalMetabolicRate += 5;
+    if(genderSelected == genderChoices.male) {
+        basalMetabolicRate += genderChoices.maleMathVal
     } else {
-        basalMetabolicRate -= 161;
+        basalMetabolicRate += genderChoices.femaleMathVal
     }
+
+
 
     const activityLevelSelected = document.querySelector("input[name='activityLevel']:checked").id
     switch(activityLevelSelected) {
-        case "sedentary": 
-            basalMetabolicRate *= 1.2
+        case activityLevelChoices.sedentary: 
+            basalMetabolicRate *= sedentaryLevel
             break;
-        case "lightlyActive": 
-            basalMetabolicRate *= 1.375
+        case activityLevelChoices.lightlyActive: 
+            basalMetabolicRate *= lightlyActiveLevel
             break;    
-        case "moderatelyActive": 
-            basalMetabolicRate *= 1.550
+        case activityLevelChoices.moderatelyActive: 
+            basalMetabolicRate *= moderatelyActiveLevel
             break;   
-        case "veryActive": 
-            basalMetabolicRate *= 1.725
+        case activityLevelChoices.veryActive: 
+            basalMetabolicRate *= veryActiveLevel
             break;   
-        case "extraActive": 
-            basalMetabolicRate *= 1.9
+        case activityLevelChoices.extraActive: 
+            basalMetabolicRate *= extraActiveLevel
             break;  
-
     }
+
+
 
     const goalSelected = document.querySelector("input[name='goalChoice']:checked").id
     switch(goalSelected) {
-        case "loseWeight":
-            basalMetabolicRate *= 0.8
+        case goalChoices.loseWeight:
+            basalMetabolicRate *= goalChoices.caloricDeficitFactor
             break;
-        case "gainWeight":
-            basalMetabolicRate += 500
+        case gainWeight:
+            basalMetabolicRate += goalChoices.caloricSurplusValue
     }
     basalMetabolicRate = basalMetabolicRate.toFixed(0)
 
