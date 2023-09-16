@@ -6,6 +6,7 @@ const numberRegex = /^-?\d+\.?\d*$/
 const poundToKgFactor = 2.20462
 const feetToCentiMetersFactor = 30.48
 const inchToCentiMetersFactor = 2.54
+const feetToInchFactor = 12
 
 function poundToKg(pound) {
     return pound / poundToKgFactor
@@ -13,6 +14,19 @@ function poundToKg(pound) {
 
 function kgToPound(kg) {
     return kg * poundToKgFactor
+}
+
+function feetToCm(feet, inch) {
+    feet *= feetToCentiMetersFactor
+    inch *= inchToCentiMetersFactor
+    return(feet + inch)
+}
+
+function cmToFeet(cm) {
+    let totalLength = cm / inchToCentiMetersFactor
+    let feet = Math.floor(totalLength / feetToInchFactor)
+    let inch = totalLength - ( feetToInchFactor * feet)
+    return [feet, inch]
 }
 
 const genderChoices = {
@@ -46,7 +60,8 @@ let personCharacteristics = {
     weightKg: 0, 
     weightPound: 0, 
     heightCm: 0, 
-    heightFeet: 0, 
+    heightFeet: 0,
+    heightInch: 0, 
     age: 0,
     basalMetabolicRate: 0,
     caloricRequirements: 0,
@@ -120,24 +135,22 @@ document.forms[0].onsubmit = (e) => {
         personCharacteristics.weightPound = parseFloat(weight)
         personCharacteristics.weightKg    = poundToKg(personCharacteristics.weightPound)
     }
-    console.log
 
     const heightSelected = document.querySelector("input[name='heightChoice']:checked").id
-    personCharacteristics.height = document.getElementById("height")
     if(heightSelected == "heightChoiceFeet") {
-        let heightFeet = parseFloat(document.getElementById("heightPartFeet").value)
-        let heightInch = parseFloat(document.getElementById("heightPartInches").value)
-        heightFeet *= feetToCentiMetersFactor
-        heightInch *= inchToCentiMetersFactor
-
-        personCharacteristics.height = heightFeet + heightInch
+        personCharacteristics.heightFeet = parseFloat(document.getElementById("heightPartFeet").value)
+        personCharacteristics.heightInch = parseFloat(document.getElementById("heightPartInches").value)
+        personCharacteristics.heightCm   = feetToCm(personCharacteristics.heightFeet, personCharacteristics.heightInch)
     } else {
-        personCharacteristics.height = parseFloat(document.getElementById("height").value)
+        personCharacteristics.heightCm = parseFloat(document.getElementById("height").value)
+        const [heightFeet, heightInch] = cmToFeet(parseFloat(document.getElementById("height").value))
+        personCharacteristics.heightFeet = heightFeet
+        personCharacteristics.heightInch = heightInch
     }
 
     personCharacteristics.age = age.value;
-    console.log(`Weight: ${personCharacteristics.weight}\n Height: ${personCharacteristics.height}\n Age: ${personCharacteristics.age}\n`)
-    let basalMetabolicRate = (10 * personCharacteristics.weight) + (6.25 * personCharacteristics.height) - (5 * personCharacteristics.age) 
+    console.log(`Weight: ${personCharacteristics.weightKg}\n Height: ${personCharacteristics.heightCm}\n Age: ${personCharacteristics.age}\n`)
+    let basalMetabolicRate = (10 * personCharacteristics.weightKg) + (6.25 * personCharacteristics.heightCm) - (5 * personCharacteristics.age) 
     personCharacteristics.basalMetabolicRate = basalMetabolicRate
 
 
