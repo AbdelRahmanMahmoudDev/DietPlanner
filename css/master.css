@@ -133,3 +133,24 @@ fieldset {
     cursor: pointer;
 }
 /* end questionnaire */
+
+/* start dynamic content container */
+.container .number-display {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.container .number-display .number-card {
+    background-color: #e8e4e6;
+    padding: 20px;
+    border-radius: 3px;
+    width: 7rem;
+    max-width: 7rem;
+}
+.container .number-display .number-card h4 {
+    color: #001e1d;
+}
+.container .number-display .number-card p {
+    color: #0f3433;
+}
+/* end dynamic content container */

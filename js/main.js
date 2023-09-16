@@ -1,6 +1,7 @@
 const heightChoices = document.querySelectorAll("input[name='heightChoice']")
 const age = document.getElementById("age")
 const heightInputSection = document.getElementById("heightDynamicInput")
+const formSection = document.querySelector(".questionnaire")
 
 const numberRegex = /^-?\d+\.?\d*$/
 const poundToKgFactor = 2.20462
@@ -81,7 +82,7 @@ let personCharacteristics = {
     fatCalories: 0
 }
 
-let inputFieldMeters = document.createElement("input")
+const inputFieldMeters = document.createElement("input")
 inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
 inputFieldMeters.setAttribute("name", "heightInCm")
@@ -92,9 +93,9 @@ inputFieldMeters.style.display = "block"
 
 heightInputSection.appendChild(inputFieldMeters) // default 
 
-let inputContainerFeet = document.createElement("div")
+const inputContainerFeet = document.createElement("div")
 
-let inputFieldFeet = document.createElement("input")
+const inputFieldFeet = document.createElement("input")
 inputFieldFeet.setAttribute("type", "number")
 inputFieldFeet.setAttribute("required", "")
 inputFieldFeet.setAttribute("name", "heightPartFeet")
@@ -104,12 +105,29 @@ inputFieldFeet.style.marginRight = "10px";
 inputFieldFeet.style.marginBottom = "10px";
 inputContainerFeet.appendChild(inputFieldFeet)
 
-let inputFieldInches = document.createElement("input")
+const inputFieldInches = document.createElement("input")
 inputFieldInches.setAttribute("type", "number")
 inputFieldInches.setAttribute("name", "heightPartInches")
 inputFieldInches.setAttribute("id", "heightPartInches")
 inputFieldInches.setAttribute("placeholder", "Inches")
 inputContainerFeet.appendChild(inputFieldInches)
+
+const containerElement = document.createElement("div")
+containerElement.classList.add("container")
+
+const numberDisplay = document.createElement("div")
+numberDisplay.classList.add("number-display")
+containerElement.appendChild(numberDisplay)
+
+const numberCard = document.createElement("div")
+numberCard.classList.add("number-card")
+
+const cardTitle = document.createElement("h4")
+cardTitle.innerText = "Calories"
+numberCard.appendChild(cardTitle)
+
+const cardTitles = ["Calories", "Protein", "Fat", "Carbs"]
+
 
 heightChoices.forEach((btn) => {
     btn.addEventListener('change', () => {
@@ -153,8 +171,8 @@ document.forms[0].onsubmit = (e) => {
         personCharacteristics.heightInch = parseFloat(document.getElementById("heightPartInches").value)
         personCharacteristics.heightCm   = feetToCm(personCharacteristics.heightFeet, personCharacteristics.heightInch)
     } else {
-        personCharacteristics.heightCm = parseFloat(document.getElementById("height").value)
-        const [heightFeet, heightInch] = cmToFeet(parseFloat(document.getElementById("height").value))
+        personCharacteristics.heightCm   = parseFloat(document.getElementById("height").value)
+        const [heightFeet, heightInch]   = cmToFeet(parseFloat(document.getElementById("height").value))
         personCharacteristics.heightFeet = heightFeet
         personCharacteristics.heightInch = heightInch
     }
@@ -218,5 +236,22 @@ document.forms[0].onsubmit = (e) => {
     personCharacteristics.carbGrams       = (personCharacteristics.carbCalories / macroGlobals.proteinCalorieWeight).toFixed(0)
 
     console.log(`Macros\nprotein: ${personCharacteristics.proteinGrams} (${personCharacteristics.proteinCalories})\nfat: ${personCharacteristics.fatGrams} (${personCharacteristics.fatCalories})\nCarbs: ${personCharacteristics.carbGrams} (${personCharacteristics.carbCalories})`)
+    const cardNumbers = [personCharacteristics.caloricRequirements, personCharacteristics.proteinGrams, personCharacteristics.fatGrams, personCharacteristics.carbGrams]
+    for(index = 0; index < cardNumbers.length; ++index) {
+        const numberCard = document.createElement("div")
+        numberCard.classList.add("number-card")
+    
+        const cardTitle = document.createElement("h4")
+        cardTitle.innerText = `${cardTitles[index]}`
+        numberCard.appendChild(cardTitle)
+
+        const cardNumber = document.createElement("p")
+        cardNumber.innerText = `${cardNumbers[index]}`
+        numberCard.appendChild(cardNumber)
+
+        numberDisplay.appendChild(numberCard)
+    }
+    formSection.style.display = "none"
+    document.body.appendChild(containerElement)
 
 }
