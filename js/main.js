@@ -2,6 +2,8 @@ const heightChoices = document.querySelectorAll("input[name='heightChoice']")
 const age = document.getElementById("age")
 const heightInputSection = document.getElementById("heightDynamicInput")
 const formSection = document.querySelector(".questionnaire")
+const dynamicSection = document.querySelector(".dynamic-content")
+const macroNumbers = Array.from(document.querySelectorAll(".number-display .number-card p"))
 
 const numberRegex = /^-?\d+\.?\d*$/
 const poundToKgFactor = 2.20462
@@ -115,18 +117,22 @@ inputContainerFeet.appendChild(inputFieldInches)
 const containerElement = document.createElement("div")
 containerElement.classList.add("container")
 
-const numberDisplay = document.createElement("div")
-numberDisplay.classList.add("number-display")
-containerElement.appendChild(numberDisplay)
+const buttonSection = document.createElement("div")
+buttonSection.classList.add("button-section")
 
-const numberCard = document.createElement("div")
-numberCard.classList.add("number-card")
+const addItemButton = document.createElement("button")
+addItemButton.classList.add("list-button")
+addItemButton.innerHTML = "+"
+buttonSection.appendChild(addItemButton)
 
-const cardTitle = document.createElement("h4")
-cardTitle.innerText = "Calories"
-numberCard.appendChild(cardTitle)
+const removeItemButton = document.createElement("button")
+removeItemButton.classList.add("list-button")
+removeItemButton.innerHTML = "-"
+buttonSection.appendChild(removeItemButton)
 
-const cardTitles = ["Calories", "Protein", "Fat", "Carbs"]
+containerElement.appendChild(buttonSection)
+
+
 
 
 heightChoices.forEach((btn) => {
@@ -236,22 +242,14 @@ document.forms[0].onsubmit = (e) => {
     personCharacteristics.carbGrams       = (personCharacteristics.carbCalories / macroGlobals.proteinCalorieWeight).toFixed(0)
 
     console.log(`Macros\nprotein: ${personCharacteristics.proteinGrams} (${personCharacteristics.proteinCalories})\nfat: ${personCharacteristics.fatGrams} (${personCharacteristics.fatCalories})\nCarbs: ${personCharacteristics.carbGrams} (${personCharacteristics.carbCalories})`)
+
+
     const cardNumbers = [personCharacteristics.caloricRequirements, personCharacteristics.proteinGrams, personCharacteristics.fatGrams, personCharacteristics.carbGrams]
-    for(index = 0; index < cardNumbers.length; ++index) {
-        const numberCard = document.createElement("div")
-        numberCard.classList.add("number-card")
-    
-        const cardTitle = document.createElement("h4")
-        cardTitle.innerText = `${cardTitles[index]}`
-        numberCard.appendChild(cardTitle)
-
-        const cardNumber = document.createElement("p")
-        cardNumber.innerText = `${cardNumbers[index]}`
-        numberCard.appendChild(cardNumber)
-
-        numberDisplay.appendChild(numberCard)
+    for(index = 0; index < macroNumbers.length; ++index) {
+        macroNumbers[index].innerText = `${cardNumbers[index]}`
     }
+
     formSection.style.display = "none"
-    document.body.appendChild(containerElement)
+    dynamicSection.style.display = "block"
 
 }
