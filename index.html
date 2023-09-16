@@ -25,101 +25,103 @@
         <!-- end header -->
         <!-- start Questionnaire -->
         <div class="questionnaire">
-            <form action="" method="GET">
-                <div class="weight-section section">
-                    <div class="weight">
-                        <label for="weight">Weight</label><br>
-                        <input type="text" placeholder="Your weight" required name="weight" id="weight" value="85.35">
-                        <div class="weight-choice">
+            <div class="container">
+                <form action="" method="GET">
+                    <div class="weight-section section">
+                        <div class="weight">
+                            <label for="weight">Weight</label><br>
+                            <input type="text" placeholder="Your weight" required name="weight" id="weight" value="85.35">
+                            <div class="weight-choice">
+                                <fieldset>
+                                    <div class="radio-choice">
+                                        <label for="weightChoiceKG">kgs</label>
+                                        <input type="radio" name="weightChoice" checked id="weightChoiceKG">
+                                    </div>
+                                    <div class="radio-choice">
+                                        <label for="weightChoicPounds">pounds</label>
+                                        <input type="radio" name="weightChoice" id="weightChoicPounds">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="height-section section">
+                        <div class="height">
+                            <p>Height</p><br>
+                            <div id="heightDynamicInput"><!--Insert js--></div>
+                        </div>
+                        <div class="height-choice">
                             <fieldset>
                                 <div class="radio-choice">
-                                    <label for="weightChoiceKG">kgs</label>
-                                    <input type="radio" name="weightChoice" checked id="weightChoiceKG">
+                                    <label for="heightChoiceMeters">cm</label>
+                                    <input type="radio" name="heightChoice" checked id="heightChoiceMeters">
                                 </div>
                                 <div class="radio-choice">
-                                    <label for="weightChoicPounds">pounds</label>
-                                    <input type="radio" name="weightChoice" id="weightChoicPounds">
+                                    <label for="heightChoiceFeet">Feet | Inches</label>
+                                    <input type="radio" name="heightChoice" id="heightChoiceFeet">
                                 </div>
                             </fieldset>
                         </div>
                     </div>
-                </div>
-                <div class="height-section section">
-                    <div class="height">
-                        <p>Height</p><br>
-                        <div id="heightDynamicInput"><!--Insert js--></div>
+                    <div class="age-section section">
+                        <label for="age">Age</label><br>
+                        <input type="number" placeholder="Your age" name="age" id="age" value="23">
                     </div>
-                    <div class="height-choice">
+                    <div class="gender-section section">
+                        <div class="gender-choice">
+                            <fieldset>
+                                <legend>Gender</legend>
+                                <div class="radio-choice">
+                                    <label for="genderChoiceMale">Male</label>
+                                    <input type="radio" checked name="genderChoice" id="genderChoiceMale">
+                                </div>
+                                <div class="radio-choice">
+                                    <label for="genderChoiceFemale">Female</label>
+                                    <input type="radio" name="genderChoice" id="genderChoiceFemale">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="activity-section section">
                         <fieldset>
+                            <legend>Choose your activity level</legend>
                             <div class="radio-choice">
-                                <label for="heightChoiceMeters">cm</label>
-                                <input type="radio" name="heightChoice" checked id="heightChoiceMeters">
+                                <label for="sedentary">sedentary(No activity)</label>
+                                <input type="radio" name="activityLevel" id="sedentary"><br>
                             </div>
                             <div class="radio-choice">
-                                <label for="heightChoiceFeet">Feet | Inches</label>
-                                <input type="radio" name="heightChoice" id="heightChoiceFeet">
+                                <label for="lightlyActive">Lightly Active (1 - 2 Days)</label>
+                                <input type="radio" name="activityLevel" checked id="lightlyActive"><br>
                             </div>
+                            <div class="radio-choice">
+                                <label for="moderatelyActive">Moderately Active (3 - 5 Days)</label>
+                                <input type="radio" name="activityLevel" id="moderatelyActive"><br>
+                            </div>
+                            <div class="radio-choice">
+                                <label for="veryActive">Very Active (6 - 7 Days)</label>
+                                <input type="radio" name="activityLevel" id="veryActive"><br>
+                            </div>
+                            <div class="radio-choice">
+                                <label for="extraActive">Extra Active (2x per day)</label>
+                                <input type="radio" name="activityLevel" id="extraActive"><br>
+                            </div>
+                            <div class="activity-choice">
                         </fieldset>
                     </div>
-                </div>
-                <div class="age-section section">
-                    <label for="age">Age</label><br>
-                    <input type="number" placeholder="Your age" name="age" id="age" value="23">
-                </div>
-                <div class="gender-section section">
-                    <div class="gender-choice">
+                    <div class="goal-section section">
                         <fieldset>
-                            <legend>Gender</legend>
-                            <div class="radio-choice">
-                                <label for="genderChoiceMale">Male</label>
-                                <input type="radio" checked name="genderChoice" id="genderChoiceMale">
-                            </div>
-                            <div class="radio-choice">
-                                <label for="genderChoiceFemale">Female</label>
-                                <input type="radio" name="genderChoice" id="genderChoiceFemale">
-                            </div>
+                            <legend>Choose your goal</legend>
+                            <label for="loseWeight">Lose Weight</label>
+                            <input type="radio" name="goalChoice" checked id="loseWeight"><br>
+                            <label for="maintainWeight">Maintain Weight</label>
+                            <input type="radio" name="goalChoice" id="maintainWeight"><br>
+                            <label for="gainWeight">Gain Weight</label>
+                            <input type="radio" name="goalChoice" id="gainWeight"><br>
                         </fieldset>
                     </div>
-                </div>
-                <div class="activity-section section">
-                    <fieldset>
-                        <legend>Choose your activity level</legend>
-                        <div class="radio-choice">
-                            <label for="sedentary">sedentary(No activity)</label>
-                            <input type="radio" name="activityLevel" id="sedentary"><br>
-                        </div>
-                        <div class="radio-choice">
-                            <label for="lightlyActive">Lightly Active (1 - 2 Days)</label>
-                            <input type="radio" name="activityLevel" checked id="lightlyActive"><br>
-                        </div>
-                        <div class="radio-choice">
-                            <label for="moderatelyActive">Moderately Active (3 - 5 Days)</label>
-                            <input type="radio" name="activityLevel" id="moderatelyActive"><br>
-                        </div>
-                        <div class="radio-choice">
-                            <label for="veryActive">Very Active (6 - 7 Days)</label>
-                            <input type="radio" name="activityLevel" id="veryActive"><br>
-                        </div>
-                        <div class="radio-choice">
-                            <label for="extraActive">Extra Active (2x per day)</label>
-                            <input type="radio" name="activityLevel" id="extraActive"><br>
-                        </div>
-                        <div class="activity-choice">
-                    </fieldset>
-                </div>
-                <div class="goal-section section">
-                    <fieldset>
-                        <legend>Choose your goal</legend>
-                        <label for="loseWeight">Lose Weight</label>
-                        <input type="radio" name="goalChoice" checked id="loseWeight"><br>
-                        <label for="maintainWeight">Maintain Weight</label>
-                        <input type="radio" name="goalChoice" id="maintainWeight"><br>
-                        <label for="gainWeight">Gain Weight</label>
-                        <input type="radio" name="goalChoice" id="gainWeight"><br>
-                    </fieldset>
-                </div>
-                <input type="submit" value="Let's go!">
-                </form>
+                    <input type="submit" value="Let's go!">
+                    </form>
+            </div>
         </div>
         </div>
         <!-- End Questionnaire -->

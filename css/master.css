@@ -84,7 +84,8 @@ fieldset {
 .questionnaire {
     height: calc(100vh);
     display: flex;
-    /* justify-content: center; */
+    /*justify-content: center;
+    */
 }
 .questionnaire .height p {
     margin: 0 0 -18px 0;
