@@ -114,23 +114,23 @@ inputFieldInches.setAttribute("id", "heightPartInches")
 inputFieldInches.setAttribute("placeholder", "Inches")
 inputContainerFeet.appendChild(inputFieldInches)
 
-const containerElement = document.createElement("div")
-containerElement.classList.add("container")
+// const containerElement = document.createElement("div")
+// containerElement.classList.add("container")
 
-const buttonSection = document.createElement("div")
-buttonSection.classList.add("button-section")
+// const buttonSection = document.createElement("div")
+// buttonSection.classList.add("button-section")
 
-const addItemButton = document.createElement("button")
-addItemButton.classList.add("list-button")
-addItemButton.innerHTML = "+"
-buttonSection.appendChild(addItemButton)
+// const addItemButton = document.createElement("button")
+// addItemButton.classList.add("list-button")
+// addItemButton.innerHTML = "+"
+// buttonSection.appendChild(addItemButton)
 
-const removeItemButton = document.createElement("button")
-removeItemButton.classList.add("list-button")
-removeItemButton.innerHTML = "-"
-buttonSection.appendChild(removeItemButton)
+// const removeItemButton = document.createElement("button")
+// removeItemButton.classList.add("list-button")
+// removeItemButton.innerHTML = "-"
+// buttonSection.appendChild(removeItemButton)
 
-containerElement.appendChild(buttonSection)
+// containerElement.appendChild(buttonSection)
 
 
 
@@ -242,7 +242,6 @@ document.forms[0].onsubmit = (e) => {
     personCharacteristics.carbGrams       = (personCharacteristics.carbCalories / macroGlobals.proteinCalorieWeight).toFixed(0)
 
     console.log(`Macros\nprotein: ${personCharacteristics.proteinGrams} (${personCharacteristics.proteinCalories})\nfat: ${personCharacteristics.fatGrams} (${personCharacteristics.fatCalories})\nCarbs: ${personCharacteristics.carbGrams} (${personCharacteristics.carbCalories})`)
-
 
     const cardNumbers = [personCharacteristics.caloricRequirements, personCharacteristics.proteinGrams, personCharacteristics.fatGrams, personCharacteristics.carbGrams]
     for(index = 0; index < macroNumbers.length; ++index) {
