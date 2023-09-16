@@ -8,6 +8,14 @@ const feetToCentiMetersFactor = 30.48
 const inchToCentiMetersFactor = 2.54
 const feetToInchFactor = 12
 
+const macroGlobals = {
+    proteinFactor: 1,
+    proteinCalorieWeight: 4,
+    // carbs have the same calorie weight as protein
+    fatFactor: 0.3,
+    fatCalorieWeight: 9
+}
+
 function poundToKg(pound) {
     return pound / poundToKgFactor
 }
@@ -66,8 +74,11 @@ let personCharacteristics = {
     basalMetabolicRate: 0,
     caloricRequirements: 0,
     proteinGrams: 0,
+    proteinCalories: 0,
     carbGrams: 0,
-    fatGrams: 0
+    carbCalories: 0,
+    fatGrams: 0,
+    fatCalories: 0
 }
 
 let inputFieldMeters = document.createElement("input")
@@ -197,6 +208,15 @@ document.forms[0].onsubmit = (e) => {
 
     console.log(`Basal Metabolic Rate(BMR): ${personCharacteristics.basalMetabolicRate},\nCaloric Requirements: ${personCharacteristics.caloricRequirements}`)
 
+    personCharacteristics.proteinGrams    = parseFloat((macroGlobals.proteinFactor * personCharacteristics.weightPound).toFixed(0))
+    personCharacteristics.proteinCalories = parseFloat((macroGlobals.proteinCalorieWeight * personCharacteristics.proteinGrams).toFixed(0))
 
+    personCharacteristics.fatGrams        = parseFloat((macroGlobals.fatFactor * personCharacteristics.weightPound).toFixed(0))
+    personCharacteristics.fatCalories     = parseFloat((macroGlobals.fatCalorieWeight * personCharacteristics.fatGrams).toFixed(0))
+
+    personCharacteristics.carbCalories    = (personCharacteristics.caloricRequirements - (personCharacteristics.proteinCalories + personCharacteristics.fatCalories)).toFixed(0)
+    personCharacteristics.carbGrams       = (personCharacteristics.carbCalories / macroGlobals.proteinCalorieWeight).toFixed(0)
+
+    console.log(`Macros\nprotein: ${personCharacteristics.proteinGrams} (${personCharacteristics.proteinCalories})\nfat: ${personCharacteristics.fatGrams} (${personCharacteristics.fatCalories})\nCarbs: ${personCharacteristics.carbGrams} (${personCharacteristics.carbCalories})`)
 
 }
