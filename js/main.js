@@ -4,6 +4,10 @@ const heightInputSection = document.getElementById("heightDynamicInput")
 const formSection = document.querySelector(".questionnaire")
 const dynamicSection = document.querySelector(".dynamic-content")
 const macroNumbers = Array.from(document.querySelectorAll(".number-display .number-card p"))
+const addItemButton = document.querySelector(".dynamic-content .button-section button:first-child")
+const removeItemButton = document.querySelector(".dynamic-content .button-section button:last-child")
+const listSection = document.querySelector(".dynamic-content .list-section")
+const macroItem = document.querySelector(".macro-item")
 
 const numberRegex = /^-?\d+\.?\d*$/
 const poundToKgFactor = 2.20462
@@ -83,7 +87,7 @@ let personCharacteristics = {
     fatGrams: 0,
     fatCalories: 0
 }
-
+// input for meter height
 const inputFieldMeters = document.createElement("input")
 inputFieldMeters.setAttribute("type", "text")
 inputFieldMeters.setAttribute("required", "")
@@ -95,8 +99,10 @@ inputFieldMeters.style.display = "block"
 
 heightInputSection.appendChild(inputFieldMeters) // default 
 
+// input container for height feet + inches
 const inputContainerFeet = document.createElement("div")
 
+// input for height feet
 const inputFieldFeet = document.createElement("input")
 inputFieldFeet.setAttribute("type", "number")
 inputFieldFeet.setAttribute("required", "")
@@ -107,6 +113,7 @@ inputFieldFeet.style.marginRight = "10px";
 inputFieldFeet.style.marginBottom = "10px";
 inputContainerFeet.appendChild(inputFieldFeet)
 
+// input for height inches
 const inputFieldInches = document.createElement("input")
 inputFieldInches.setAttribute("type", "number")
 inputFieldInches.setAttribute("name", "heightPartInches")
@@ -114,27 +121,7 @@ inputFieldInches.setAttribute("id", "heightPartInches")
 inputFieldInches.setAttribute("placeholder", "Inches")
 inputContainerFeet.appendChild(inputFieldInches)
 
-// const containerElement = document.createElement("div")
-// containerElement.classList.add("container")
-
-// const buttonSection = document.createElement("div")
-// buttonSection.classList.add("button-section")
-
-// const addItemButton = document.createElement("button")
-// addItemButton.classList.add("list-button")
-// addItemButton.innerHTML = "+"
-// buttonSection.appendChild(addItemButton)
-
-// const removeItemButton = document.createElement("button")
-// removeItemButton.classList.add("list-button")
-// removeItemButton.innerHTML = "-"
-// buttonSection.appendChild(removeItemButton)
-
-// containerElement.appendChild(buttonSection)
-
-
-
-
+// check which height option the user selected
 heightChoices.forEach((btn) => {
     btn.addEventListener('change', () => {
         let selected = document.querySelector("input[name='heightChoice']:checked").id
@@ -151,6 +138,24 @@ heightChoices.forEach((btn) => {
         }
     })
 })
+
+function createMacroField() {
+    // input item for macronutrients
+    const macroSection = document.createElement("div")
+    macroSection.classList.add("macro-item")
+    
+    const placeholders = ["Name", "Calories", "Protein", "Fat", "Carbs"]
+    for(index = 0; index < placeholders.length; ++index) {
+        const inputField = document.createElement("input")
+        inputField.setAttribute("type", "text")
+        inputField.setAttribute("name", `${placeholders[index]}`)
+        inputField.setAttribute("placeholder", `${placeholders[index]}`)
+        macroSection.appendChild(inputField)
+    }
+
+    return macroSection
+}
+
 
 document.forms[0].onsubmit = (e) => {
     // We don't need to store this data
@@ -251,4 +256,13 @@ document.forms[0].onsubmit = (e) => {
     formSection.style.display = "none"
     dynamicSection.style.display = "block"
 
+    addItemButton.onclick = () => {
+        listSection.appendChild(createMacroField())
+    }
+
+    removeItemButton.onclick = () => {
+        if(listSection.lastChild) {
+            listSection.removeChild(listSection.lastChild)
+        }
+    }
 }
