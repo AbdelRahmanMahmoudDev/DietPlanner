@@ -168,6 +168,9 @@ input::placeholder {
     flex-flow: row wrap;
     gap: 1rem;
 }
+.dynamic-content .list-section hr {
+    width: 100%;
+}
 .dynamic-content .list-section .macro-item input {
     margin: 1px;
 }

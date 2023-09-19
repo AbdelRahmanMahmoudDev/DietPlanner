@@ -258,6 +258,8 @@ document.forms[0].onsubmit = (e) => {
 
     addItemButton.onclick = () => {
         listSection.appendChild(createMacroField())
+        const separator = document.createElement("hr")
+        listSection.appendChild(separator)
     }
 
     removeItemButton.onclick = () => {
