@@ -7,7 +7,7 @@ const macroNumbers = Array.from(document.querySelectorAll(".number-display .numb
 const addItemButton = document.querySelector(".dynamic-content .button-section button:first-child")
 const removeItemButton = document.querySelector(".dynamic-content .button-section button:last-child")
 const listSection = document.querySelector(".dynamic-content .list-section")
-const macroItem = document.querySelector(".macro-item")
+let macroItems = Array.from(document.querySelectorAll(".macro-item"))
 
 const numberRegex = /^-?\d+\.?\d*$/
 const poundToKgFactor = 2.20462
@@ -144,7 +144,7 @@ function createMacroField() {
     const macroSection = document.createElement("div")
     macroSection.classList.add("macro-item")
     
-    const placeholders = ["Name", "Calories", "Protein", "Fat", "Carbs"]
+    const placeholders = ["Name", "Weight (gm)", "Calories", "Protein (gm)", "Fat (gm)", "Carbs (gm)"]
     for(index = 0; index < placeholders.length; ++index) {
         const inputField = document.createElement("input")
         inputField.setAttribute("type", "text")
@@ -258,13 +258,16 @@ document.forms[0].onsubmit = (e) => {
 
     addItemButton.onclick = () => {
         listSection.appendChild(createMacroField())
-        const separator = document.createElement("hr")
-        listSection.appendChild(separator)
+        // macroItems = Array.from(document.querySelectorAll(".macro-item"))
+        // console.log(macroItems)
     }
-
+    
     removeItemButton.onclick = () => {
+        console.log(listSection.contains(document.body.querySelector(".macro-item")))
         if(listSection.lastChild) {
-            listSection.removeChild(listSection.lastChild)
+            listSection.removeChild(lastChild)
+            // macroItems = Array.from(document.querySelectorAll(".macro-item"))
+            // console.log(macroItems)
         }
     }
 }

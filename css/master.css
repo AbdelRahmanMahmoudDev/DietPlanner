@@ -174,4 +174,17 @@ input::placeholder {
 .dynamic-content .list-section .macro-item input {
     margin: 1px;
 }
+.dynamic-content .list-section .macro-item {
+    position: relative;
+}
+.dynamic-content .list-section .macro-item::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #004643;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 /* end dynamic content container */
