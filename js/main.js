@@ -256,18 +256,26 @@ document.forms[0].onsubmit = (e) => {
     formSection.style.display = "none"
     dynamicSection.style.display = "block"
 
+    function updateMacroItemState(macroItemList) {
+        macroItemList = Array.from(document.querySelectorAll(".macro-item"))
+        for(index = 0; index < macroItemList.length; ++index) {
+            inputList =  Array.from(document.querySelectorAll(`.macro-item:nth-child(${index + 1}) input`))
+            const inputCalories =  document.querySelector(`.macro-item:nth-child(${index + 1}) input[placeholder="Calories"]`)
+            console.log(inputCalories)
+        }
+    }
+
     addItemButton.onclick = () => {
         listSection.appendChild(createMacroField())
-        // macroItems = Array.from(document.querySelectorAll(".macro-item"))
-        // console.log(macroItems)
+        //macroItems = Array.from(document.querySelectorAll(".macro-item"))
+        updateMacroItemState(macroItems)
     }
     
     removeItemButton.onclick = () => {
         console.log(listSection.contains(document.body.querySelector(".macro-item")))
         if(listSection.lastChild) {
-            listSection.removeChild(lastChild)
-            // macroItems = Array.from(document.querySelectorAll(".macro-item"))
-            // console.log(macroItems)
+            listSection.removeChild(listSection.lastChild)
+            macroItems = Array.from(document.querySelectorAll(".macro-item"))
         }
     }
 }
