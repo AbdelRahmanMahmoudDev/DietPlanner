@@ -23,6 +23,18 @@ const macroGlobals = {
     fatCalorieWeight: 9
 }
 
+let tallyGlobals = {
+    calorieTally: 0,
+    proteinTally: 0,
+    carbTally: 0,
+    fatTally: 0
+}
+
+// const macroNumberInputs = {
+//     calorieInput : document.querySelector(`.macro-item:nth-child(${index + 1}) input[placeholder="Calories"]`).value,
+//     proteinInput : document.querySelector('.macro-item:nth-child(${index + 1}) input[placeholder="Calories"]`).value')
+// }
+
 function poundToKg(pound) {
     return pound / poundToKgFactor
 }
@@ -257,12 +269,10 @@ document.forms[0].onsubmit = (e) => {
     dynamicSection.style.display = "block"
 
     function updateMacroItemState(macroItemList) {
-        macroItemList = Array.from(document.querySelectorAll(".macro-item"))
-        for(index = 0; index < macroItemList.length; ++index) {
-            inputList =  Array.from(document.querySelectorAll(`.macro-item:nth-child(${index + 1}) input`))
-            const inputCalories =  document.querySelector(`.macro-item:nth-child(${index + 1}) input[placeholder="Calories"]`)
-            console.log(inputCalories)
-        }
+        macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Calories"]`))
+        const map1 = macroItemList.map((ele) => ele = parseFloat(ele.value))
+        tallyGlobals.calorieTally = map1.reduce((acc, curr) => (curr) ? acc + curr : acc + 0)
+        macroNumbers[0].innerText = `${personCharacteristics.caloricRequirements - tallyGlobals.calorieTally}`
     }
 
     addItemButton.onclick = () => {
