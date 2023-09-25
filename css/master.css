@@ -146,7 +146,7 @@ input::placeholder {
     justify-content: flex-end;
     margin: 1rem;
 }
-.dynamic-content .button-section button {
+.dynamic-content button {
     padding: 1rem;
     margin-right: 1rem;
     border: none;
@@ -159,7 +159,7 @@ input::placeholder {
     -ms-transition: 0.3s;
     -o-transition: 0.3s;
 }
-.dynamic-content .button-section button:active {
+.dynamic-content button:active {
     background-color: #a57d40;
 }
 .dynamic-content .list-section {
