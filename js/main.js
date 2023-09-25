@@ -151,12 +151,13 @@ heightChoices.forEach((btn) => {
     })
 })
 
+
 function createMacroField() {
     // input item for macronutrients
+    const placeholders = ["Name", "Weight (gm)", "Calories", "Protein (gm)", "Fat (gm)", "Carbs (gm)"]
     const macroSection = document.createElement("div")
     macroSection.classList.add("macro-item")
     
-    const placeholders = ["Name", "Weight (gm)", "Calories", "Protein (gm)", "Fat (gm)", "Carbs (gm)"]
     for(index = 0; index < placeholders.length; ++index) {
         const inputField = document.createElement("input")
         inputField.setAttribute("type", "text")
@@ -268,24 +269,46 @@ document.forms[0].onsubmit = (e) => {
     formSection.style.display = "none"
     dynamicSection.style.display = "block"
 
-    function updateMacroItemState(macroItemList) {
-        macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Calories"]`))
-        const map1 = macroItemList.map((ele) => ele = parseFloat(ele.value))
-        tallyGlobals.calorieTally = map1.reduce((acc, curr) => (curr) ? acc + curr : acc + 0)
-        macroNumbers[0].innerText = `${personCharacteristics.caloricRequirements - tallyGlobals.calorieTally}`
+    function updateMacroItemState() {
+        let  macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Calories"]`))
+        macroItemList = (macroItemList.length > 0) ? macroItemList.map((ele) => ele = parseFloat(ele.value)) : macroItemList
+        macroItemList = (macroItemList.length > 0) ? macroItemList.reduce((acc, curr) => (curr) ? acc + curr : acc + 0): macroItemList
+        tallyGlobals.calorieTally = Number.isNaN(macroItemList) ? 0 : macroItemList
+        let displayedVal = personCharacteristics.caloricRequirements - tallyGlobals.calorieTally
+        macroNumbers[0].innerText = (displayedVal > 0) ? displayedVal : 0
+
+        macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Protein (gm)"]`))
+        macroItemList = (macroItemList.length > 0) ? macroItemList.map((ele) => ele = parseFloat(ele.value)) : macroItemList
+        macroItemList = (macroItemList.length > 0) ? macroItemList.reduce((acc, curr) => (curr) ? acc + curr : acc + 0): macroItemList
+        tallyGlobals.proteinTally = Number.isNaN(macroItemList) ? 0 : macroItemList
+        displayedVal = personCharacteristics.proteinGrams - tallyGlobals.proteinTally
+        macroNumbers[1].innerText = (displayedVal > 0) ? displayedVal : 0
+
+        macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Fat (gm)"]`))
+        macroItemList = (macroItemList.length > 0) ? macroItemList.map((ele) => ele = parseFloat(ele.value)) : macroItemList
+        macroItemList = (macroItemList.length > 0) ? macroItemList.reduce((acc, curr) => (curr) ? acc + curr : acc + 0): macroItemList
+        tallyGlobals.fatTally = Number.isNaN(macroItemList) ? 0 : macroItemList
+        displayedVal = personCharacteristics.fatGrams - tallyGlobals.fatTally
+        macroNumbers[2].innerText = (displayedVal > 0) ? displayedVal : 0
+
+        macroItemList = Array.from(document.querySelectorAll(`.macro-item input[placeholder="Carbs (gm)"]`))
+        macroItemList = (macroItemList.length > 0) ? macroItemList.map((ele) => ele = parseFloat(ele.value)) : macroItemList
+        macroItemList = (macroItemList.length > 0) ? macroItemList.reduce((acc, curr) => (curr) ? acc + curr : acc + 0): macroItemList
+        tallyGlobals.carbTally = Number.isNaN(macroItemList) ? 0 : macroItemList
+        displayedVal = personCharacteristics.carbGrams - tallyGlobals.carbTally
+        macroNumbers[3].innerText = (displayedVal > 0) ? displayedVal : 0
     }
 
     addItemButton.onclick = () => {
         listSection.appendChild(createMacroField())
-        //macroItems = Array.from(document.querySelectorAll(".macro-item"))
-        updateMacroItemState(macroItems)
+        updateMacroItemState()
     }
     
     removeItemButton.onclick = () => {
-        console.log(listSection.contains(document.body.querySelector(".macro-item")))
         if(listSection.lastChild) {
             listSection.removeChild(listSection.lastChild)
             macroItems = Array.from(document.querySelectorAll(".macro-item"))
         }
+        updateMacroItemState()
     }
 }
