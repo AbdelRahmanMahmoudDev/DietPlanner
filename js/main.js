@@ -303,12 +303,20 @@ document.forms[0].onsubmit = (e) => {
         listSection.appendChild(createMacroField())
         updateMacroItemState()
     }
-    
     removeItemButton.onclick = () => {
         if(listSection.lastChild) {
             listSection.removeChild(listSection.lastChild)
-            macroItems = Array.from(document.querySelectorAll(".macro-item"))
         }
         updateMacroItemState()
     }
+    // Array.from(document.querySelectorAll(`.button-section button`)).forEach((btn) => {
+    //     btn.addEventListener('click', () => {
+    //         macroItems = Array.from(document.querySelectorAll(".macro-item"))
+    //         if(macroItems.length > 0) {
+    //             Array.from(document.querySelectorAll(`.macro-item input`)).forEach((input) => {
+    //                 input.addEventListener(`change`, updateMacroItemState())
+    //             })
+    //         }
+    //     })
+    // })
 }
