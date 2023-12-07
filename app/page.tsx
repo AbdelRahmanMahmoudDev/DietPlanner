@@ -1,9 +1,9 @@
 import HomePage from './pages/Homepage/homePage'
-import { ThemeContextProvider } from './contexts/themeContext'
+import { ContextProvider } from './contexts/context'
 export default function Home() {
   return (
-    <ThemeContextProvider>
+    <ContextProvider>
         <HomePage />
-    </ThemeContextProvider>
+    </ContextProvider>
   )
 }

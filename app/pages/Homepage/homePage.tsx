@@ -1,10 +1,10 @@
 "use client";
 import {Header, Form} from "../../components"
-import { useThemeProvider } from "@/app/contexts/themeContext"
+import { useThemeProvider } from "@/app/contexts/context"
 export default function HomePage() {
-    const {toggleTheme} = useThemeProvider() || {};
+    const {state} = useThemeProvider() || {};
     return (
-        <div className={toggleTheme ? "bg-dark text-white" : "bg-white text-dark-text"}>
+        <div className={state.isDarkTheme ? "bg-dark text-white" : "bg-white text-dark-text"}>
             <Header />
             <Form />
         </div>

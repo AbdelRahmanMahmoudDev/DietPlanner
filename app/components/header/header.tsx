@@ -1,12 +1,13 @@
 "use client"
-import { useThemeProvider } from "@/app/contexts/themeContext";
+import { useThemeProvider, ACTIONS } from "@/app/contexts/context";
 export function Header() {
-    const {toggleTheme, updateTheme} = useThemeProvider() || {};
+    const {state, dispatch} = useThemeProvider() || {};
     const onButtonClick = (): void => {
-        updateTheme();
+        dispatch({type: ACTIONS.TOGGLE_THEME});
+        console.log(state)
     }
 
-    const themeSwitchClasses = toggleTheme ?
+    const themeSwitchClasses = state.isDarkTheme ?
     "block absolute transition-all bg-white rounded w-6 h-6 top-[50%] translate-y-[-50%] start-[60%] rounded-xl"
     :
     "block absolute transition-all bg-black rounded w-6 h-6 top-[50%] translate-y-[-50%] start-0 rounded-xl";
