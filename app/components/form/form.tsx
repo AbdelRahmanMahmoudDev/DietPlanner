@@ -7,9 +7,9 @@ export function Form(){
                     <button className="w-1/3 hover:bg-[#666] text-white bg-[#333]" type="button">Metric System</button>
                 </fieldset>
                 <label className="block" htmlFor="inWeight">Weight</label>
-                <input className="border-2 border-black focus:outline-none" id="inWeight" type="number"/>
+                <input className="border-2 border-black focus:outline-none" id="inWeight" type="number" placeholder="weight in kg"/>
                 <label className="block" htmlFor="inHeight">Height</label>
-                <input className="border-2 border-black focus:outline-none" id="inHeight" type="number"/>
+                <input className="border-2 border-black focus:outline-none" id="inHeight" type="number" placeholder="height in meters"/>
                 <label className="block" htmlFor="inAge">Age</label>
                 <input className="border-2 border-black focus:outline-none" id="inAge" type="number"/>
                 <fieldset>
