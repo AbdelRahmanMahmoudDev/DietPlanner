@@ -30,4 +30,4 @@ export const ContextProvider = ({children}: any) => {
     )
 }
 
-export const useThemeProvider = () => useContext(context);
+export const useProvider = () => useContext(context);

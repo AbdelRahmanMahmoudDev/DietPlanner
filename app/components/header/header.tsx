@@ -1,10 +1,9 @@
 "use client"
-import { useThemeProvider, ACTIONS } from "@/app/contexts/context";
+import { useProvider, ACTIONS } from "@/app/contexts/context";
 export function Header() {
-    const {state, dispatch} = useThemeProvider() || {};
+    const {state, dispatch} = useProvider() || {};
     const onButtonClick = (): void => {
         dispatch({type: ACTIONS.TOGGLE_THEME});
-        console.log(state)
     }
 
     const themeSwitchClasses = state.isDarkTheme ?
