@@ -11,9 +11,25 @@ const STAGES = {
     FINAL_STAGE: 4
 }
 
+
 export function Form(){
     const [stage, setStage] = useState(STAGES.FIRST_STAGE);
     const {state, dispatch} = useProvider();
+    
+    const onFinishStageOne = (e:any) => {
+        e.preventDefault();
+        setStage(STAGES.SECOND_STAGE);
+        if (!state.isMetric) {
+            // We will almost always want the height in the metric system
+            let heightInFeet = state.userInput.heightFeet;
+            let heightInInches = state.userInput.heightInches;
+            const FEET_TO_CM = 30.48;
+            const INCH_TO_CM = 2.54;
+            let metricHeight = (heightInFeet * FEET_TO_CM) + (heightInInches * INCH_TO_CM);
+            dispatch({type: ACTIONS.SET_HEIGHT, payload: {value: metricHeight}});
+        }
+    }
+
     const buttonClasses = state.isDarkTheme ? "w-1/3 hover:bg-[#666] text-white border-2 border-white bg-dark"
     :
     "w-1/3 hover:bg-[#666] text-white bg-[#333]";
@@ -26,7 +42,7 @@ export function Form(){
         case STAGES.FIRST_STAGE:
             return (
                 <main className="flex justify-center items-center h-screen text-light ">
-                    <form onSubmit={e => {e.preventDefault(); setStage(STAGES.SECOND_STAGE)}} className="flex flex-col justify-between min-w-[280px] w-[280px] min-h-[350px] border-2 border-black outline-none p-4" method="GET" action="">
+                    <form onSubmit={e => onFinishStageOne(e)} className="flex flex-col justify-between min-w-[280px] w-[280px] min-h-[350px] border-2 border-black outline-none p-4" method="GET" action="">
                         <span className="mx-auto">[1 / 3]</span>
                         <fieldset className="flex justify-between">
                             <button className={!state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_US})} type="button">US System</button>
@@ -34,9 +50,27 @@ export function Form(){
                         </fieldset>
                         <label className="block" htmlFor="inWeight">Weight<span className="text-[#f00]">*</span></label>
                         <input required className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inWeight" onChange={e => dispatch({type: ACTIONS.SET_WEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "kgs" : "pounds"}/>
-                        <label className="block" htmlFor="inHeight">Height<span className="text-[#f00]">*</span></label>
-                        <input required className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inHeight"  onChange={e => dispatch({type: ACTIONS.SET_HEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "meters" : "feet"}/>
-                        {!state.isMetric && <input required className="border-2 border-black focus:outline-none placeholder:px-2 my-2" id="inHeight" onChange={e => dispatch({type: ACTIONS.SET_HEIGHT_INCHES, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={"inches"}/>}
+                        {state.isMetric &&
+                            <>
+                                <label className="block" htmlFor="inHeight">Height<span className="text-[#f00]">*</span></label>
+                                <input required
+                                className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inHeight"
+                                onChange={e => dispatch({type: ACTIONS.SET_HEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder="meters"/>
+                            </>}
+                        {!state.isMetric &&
+                            <>
+                                <label className="block" htmlFor="inHeightFeet">Height<span className="text-[#f00]">*</span></label>
+                                <input required
+                                        className="w-full border-2 border-black focus:outline-none placeholder:px-2 my-2 text-dark-text"
+                                        id="inHeightFeet"
+                                        onChange={e => {dispatch({type: ACTIONS.SET_HEIGHT_FEET, payload: {value: e.target.value}}); console.log(e.target.value)}}
+                                        type="number" step="0.1" placeholder="feet"/>
+                                <input required
+                                        className="w-full border-2 border-black focus:outline-none placeholder:px-2 my-2 text-dark-text"
+                                        id="inHeightInches"
+                                        onChange={e => {dispatch({type: ACTIONS.SET_HEIGHT_INCHES, payload: {value: e.target.value}}); console.log(e.target.value)}}
+                                        type="number" step="0.1" placeholder="inches"/>
+                            </>}
                         <label className="block" htmlFor="inAge">Age<span className="text-[#f00]">*</span></label>
                         <input required className="border-2 border-black focus:outline-none text-dark-text" id="inAge"  onChange={e => dispatch({type: ACTIONS.SET_AGE, payload: {value: e.target.value}})} type="number"/>
                         <fieldset>
@@ -151,6 +185,8 @@ export function Form(){
                     <h3>Your Information:</h3>
                     <p>weight: {state.userInput.weight}</p>
                     <p>height: {state.userInput.height}</p>
+                    <p>height in feet: {state.userInput.heightFeet}</p>
+                    <p>height in inches: {state.userInput.heightInches}</p>
                     <p>age: {state.userInput.age}</p>
                     <p>gender: {state.userInput.gender}</p>
                     <p>activity level: {state.userInput.activityLevel}</p>
