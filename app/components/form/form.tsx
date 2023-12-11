@@ -1,6 +1,8 @@
 "use client"
 import {useState} from "react";
 import {useProvider, ACTIONS, OPTIONS} from "../../contexts/context";
+import Link from 'next/link';
+
 
 const STAGES = {
     FIRST_STAGE: 1,
@@ -16,7 +18,7 @@ export function Form(){
     :
     "w-1/3 hover:bg-[#666] text-white bg-[#333]";
 
-    const selectedButtonClasses = state.isMetric ? "w-1/3 bg-[#666] text-white border-2 border-white bg-dark"
+    const selectedButtonClasses = state.isDarkTheme ? "w-1/3 bg-[#666] text-white border-2 border-white bg-[#333]"
     :
     "w-1/3 bg-[#666] text-white bg-[#333]";
 
@@ -31,12 +33,12 @@ export function Form(){
                             <button className={state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_METRIC})} type="button">Metric System</button>
                         </fieldset>
                         <label className="block" htmlFor="inWeight">Weight<span className="text-[#f00]">*</span></label>
-                        <input required className="border-2 border-black focus:outline-none placeholder:px-2" id="inWeight" onChange={e => dispatch({type: ACTIONS.SET_WEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "kgs" : "pounds"}/>
+                        <input required className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inWeight" onChange={e => dispatch({type: ACTIONS.SET_WEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "kgs" : "pounds"}/>
                         <label className="block" htmlFor="inHeight">Height<span className="text-[#f00]">*</span></label>
-                        <input required className="border-2 border-black focus:outline-none placeholder:px-2" id="inHeight"  onChange={e => dispatch({type: ACTIONS.SET_HEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "meters" : "feet"}/>
+                        <input required className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inHeight"  onChange={e => dispatch({type: ACTIONS.SET_HEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "meters" : "feet"}/>
                         {!state.isMetric && <input required className="border-2 border-black focus:outline-none placeholder:px-2 my-2" id="inHeight" onChange={e => dispatch({type: ACTIONS.SET_HEIGHT_INCHES, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={"inches"}/>}
                         <label className="block" htmlFor="inAge">Age<span className="text-[#f00]">*</span></label>
-                        <input required className="border-2 border-black focus:outline-none" id="inAge"  onChange={e => dispatch({type: ACTIONS.SET_AGE, payload: {value: e.target.value}})} type="number"/>
+                        <input required className="border-2 border-black focus:outline-none text-dark-text" id="inAge"  onChange={e => dispatch({type: ACTIONS.SET_AGE, payload: {value: e.target.value}})} type="number"/>
                         <fieldset>
                             <legend>Gender <span className="block text-[#f00]">*Required</span></legend>
                             <section className="flex justify-between space-x-4 items-center">
@@ -153,6 +155,7 @@ export function Form(){
                     <p>gender: {state.userInput.gender}</p>
                     <p>activity level: {state.userInput.activityLevel}</p>
                     <p>goal: {state.userInput.goal}</p>
+                    <button className={buttonClasses}><Link href="/Plan">Create your plan</Link></button>
                 </section>
             )
     }
