@@ -1,5 +1,5 @@
 "use client"
-import { useProvider, ACTIONS } from "@/app/contexts/context";
+import { useProvider, ACTIONS } from "@/contexts/context";
 export function Header() {
     const {state, dispatch} = useProvider() || {};
     const onButtonClick = (): void => {

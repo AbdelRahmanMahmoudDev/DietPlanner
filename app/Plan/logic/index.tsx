@@ -1,0 +1,1 @@
+export {calculateBMR} from "./calculateBMR"

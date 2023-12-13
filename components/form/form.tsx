@@ -1,6 +1,6 @@
 "use client"
 import {useState} from "react";
-import {useProvider, ACTIONS, OPTIONS} from "../../contexts/context";
+import {useProvider, ACTIONS, OPTIONS} from "@/contexts/context";
 import Link from 'next/link';
 
 
@@ -63,12 +63,12 @@ export function Form(){
                                 <input required
                                         className="w-full border-2 border-black focus:outline-none placeholder:px-2 my-2 text-dark-text"
                                         id="inHeightFeet"
-                                        onChange={e => {dispatch({type: ACTIONS.SET_HEIGHT_FEET, payload: {value: e.target.value}}); console.log(e.target.value)}}
+                                        onChange={e => dispatch({type: ACTIONS.SET_HEIGHT_FEET, payload: {value: e.target.value}})}
                                         type="number" step="0.1" placeholder="feet"/>
                                 <input required
                                         className="w-full border-2 border-black focus:outline-none placeholder:px-2 my-2 text-dark-text"
                                         id="inHeightInches"
-                                        onChange={e => {dispatch({type: ACTIONS.SET_HEIGHT_INCHES, payload: {value: e.target.value}}); console.log(e.target.value)}}
+                                        onChange={e => dispatch({type: ACTIONS.SET_HEIGHT_INCHES, payload: {value: e.target.value}})}
                                         type="number" step="0.1" placeholder="inches"/>
                             </>}
                         <label className="block" htmlFor="inAge">Age<span className="text-[#f00]">*</span></label>
@@ -180,6 +180,7 @@ export function Form(){
             </main>
             )
         case STAGES.FINAL_STAGE:
+            console.log(state);
             return (
                 <section className="flex justify-center flex-col items-center h-screen">
                     <h3>Your Information:</h3>
