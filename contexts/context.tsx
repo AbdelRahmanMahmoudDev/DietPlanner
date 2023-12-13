@@ -115,7 +115,7 @@ const reducer = (state: any, action: any) => {
 
 export const ContextProvider = ({children}: any) => {
     const [state, dispatch] = useReducer(reducer,
-        {isDarkTheme: false,
+        {isDarkTheme: true,
         isMetric: false,
         userInput: {
             weight: 0,

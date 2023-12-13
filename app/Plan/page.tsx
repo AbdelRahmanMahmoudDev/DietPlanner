@@ -3,6 +3,7 @@
 import {useProvider, OPTIONS} from "@/contexts/context";
 import * as logic from "./logic"
 import {useState, useEffect} from "react";
+import {Header} from "@/components"
 
 function NutrientBox({title, info}: {title: string, info: string}) {
   return (
@@ -26,13 +27,17 @@ function Display() {
   }, [state])
   return (
     <>
-    <NutrientBox title="weight" info={bmr.toString()}/>
+    <NutrientBox title="Basal Metabolic Rate (BMR)" info={bmr.toString()}/>
     </>
   )
 }
 
 export default function Plan() {
+  const {state} = useProvider() || {};
   return (
-    <Display />
+    <div className={state.isDarkTheme ? "bg-dark text-white h-screen" : "bg-white text-dark-text h-screen"}>
+      <Header />
+      <Display />
+    </div>
   )
 }

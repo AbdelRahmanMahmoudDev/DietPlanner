@@ -1,6 +1,7 @@
+
 import type { Metadata } from 'next'
 import { Roboto_Mono } from 'next/font/google'
-import { ContextProvider } from '@/contexts/context'
+import { ContextProvider} from '@/contexts/context'
 import './globals.css'
 
 const roboto = Roboto_Mono({
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   description: 'Easily calculate your BMR, know how much calories you need, and customize your diet!',
 }
 
+
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ContextProvider>
-          {children}
+            {children}
         </ContextProvider>
       </body>
     </html>
