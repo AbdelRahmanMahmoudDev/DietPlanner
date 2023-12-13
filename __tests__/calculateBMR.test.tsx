@@ -1,4 +1,5 @@
-import {calculateBMR} from "@/app/Plan/page";
+import {calculateBMR} from "@/app/Plan/logic/calculateBMR";
+
 
 describe("BMR Calculations", () => {
     it("Calculate in Metric System", () => {

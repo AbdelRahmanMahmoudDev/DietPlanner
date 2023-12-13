@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Roboto_Mono } from 'next/font/google'
+import { ContextProvider } from '@/contexts/context'
 import './globals.css'
 
 const roboto = Roboto_Mono({
@@ -21,7 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <ContextProvider>
+          {children}
+        </ContextProvider>
+      </body>
     </html>
   )
 }

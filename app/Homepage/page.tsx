@@ -1,6 +1,6 @@
 "use client";
-import {Header, Form} from "../components"
-import { useProvider } from "@/app/contexts/context"
+import {Header, Form} from "@/components"
+import { useProvider } from "@/contexts/context"
 
 export default function HomePage() {
     const {state} = useProvider() || {};
