@@ -7,27 +7,40 @@ import {Header} from "@/components"
 
 function NutrientBox({title, info}: {title: string, info: string}) {
   return (
-    <div>
+    <div className="flex justify-center items-center flex-col border-2 w-fit rounded p-4">
       <span>{title}</span>
+      <br />
       <span>{info}</span>
     </div>
   )
 }
 
+function calculateDisplayValues(state: any) {
+  let bmr: number = logic.calculateBMR(
+    {gender: state.userInput.gender,
+    weight: state.userInput.weight,
+    height: state.userInput.height,
+    age: state.userInput.age}, state.isMetric);
+
+  let caloricNeeds: number = logic.calculateCaloricNeeds(
+    {activity_level: state.userInput.activityLevel,
+    goal: state.userInput.goal}, bmr);
+
+
+    return {bmr, caloricNeeds};
+}
+
 function Display() {
   const {state} = useProvider() || {};
-  const [bmr, setBmr] = useState("");
+  const [displayData, setDisplayData] = useState({_bmr: 0, _caloricNeeds: 0});
   useEffect(() => {
-    setBmr(logic.calculateBMR(
-      {gender: state.userInput.gender,
-      weight: state.userInput.weight,
-      height: state.userInput.height,
-      age: state.userInput.age}, state.isMetric).toString())
-      console.log(state);
-  }, [state])
+    const {bmr, caloricNeeds} = calculateDisplayValues(state);
+    setDisplayData({_bmr: bmr, _caloricNeeds: caloricNeeds})
+  }, [])
   return (
     <>
-    <NutrientBox title="Basal Metabolic Rate (BMR)" info={bmr.toString()}/>
+    <NutrientBox title="Basal Metabolic Rate (BMR)" info={displayData._bmr.toString()}/>
+    <NutrientBox title="Caloric Needs" info={displayData._caloricNeeds.toString()}/>
     </>
   )
 }
