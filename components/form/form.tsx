@@ -180,14 +180,11 @@ export function Form(){
             </main>
             )
         case STAGES.FINAL_STAGE:
-            console.log(state);
             return (
                 <section className="flex justify-center flex-col items-center h-screen">
                     <h3>Your Information:</h3>
                     <p>weight: {state.userInput.weight}</p>
                     <p>height: {state.userInput.height}</p>
-                    <p>height in feet: {state.userInput.heightFeet}</p>
-                    <p>height in inches: {state.userInput.heightInches}</p>
                     <p>age: {state.userInput.age}</p>
                     <p>gender: {state.userInput.gender}</p>
                     <p>activity level: {state.userInput.activityLevel}</p>
