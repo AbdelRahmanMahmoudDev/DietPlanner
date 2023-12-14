@@ -1,4 +1,4 @@
-import {calculateBMR} from "@/app/Plan/logic/calculateBMR";
+import { calculateBMR } from "@/app/Plan/logic";
 
 
 describe("BMR Calculations", () => {
