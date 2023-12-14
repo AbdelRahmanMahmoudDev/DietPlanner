@@ -26,21 +26,25 @@ function calculateDisplayValues(state: any) {
     {activity_level: state.userInput.activityLevel,
     goal: state.userInput.goal}, bmr);
 
-
-    return {bmr, caloricNeeds};
+  const {proteinGrams, carbGrams, fatGrams} = logic.calculateMacros(state.userInput.weight, caloricNeeds, state.isMetric);
+  
+    return {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams};
 }
 
 function Display() {
   const {state} = useProvider() || {};
-  const [displayData, setDisplayData] = useState({_bmr: 0, _caloricNeeds: 0});
+  const [displayData, setDisplayData] = useState({_bmr: 0, _caloricNeeds: 0, _protein: 0, _carbs: 0, _fats: 0});
   useEffect(() => {
-    const {bmr, caloricNeeds} = calculateDisplayValues(state);
-    setDisplayData({_bmr: bmr, _caloricNeeds: caloricNeeds})
+    const {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams} = calculateDisplayValues(state);
+    setDisplayData({_bmr: bmr, _caloricNeeds: caloricNeeds, _protein: proteinGrams, _carbs: carbGrams, _fats: fatGrams});
   }, [])
   return (
     <>
     <NutrientBox title="Basal Metabolic Rate (BMR)" info={displayData._bmr.toString()}/>
     <NutrientBox title="Caloric Needs" info={displayData._caloricNeeds.toString()}/>
+    <NutrientBox title="Protein" info={`${displayData._protein.toString()} grams`}/>
+    <NutrientBox title="Carbohydrates" info={`${displayData._carbs.toString()} grams`}/>
+    <NutrientBox title="Fats" info={`${displayData._fats.toString()} grams`}/>
     </>
   )
 }
