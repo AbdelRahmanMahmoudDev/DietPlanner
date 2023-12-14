@@ -10,12 +10,12 @@ const ACTIVITY_LEVELS = {
 
 const CALORIES_TO_BULK = 500;
 
-type MacroFactors = {
+type CaloricNeedsFactors = {
     activity_level: string,
     goal: string,
 }
 
-export function calculateCaloricNeeds(data: MacroFactors, bmr: number): number {
+export function calculateCaloricNeeds(data: CaloricNeedsFactors, bmr: number): number {
     let caloricNeeds: number = bmr;
 
     switch(data.activity_level) {
