@@ -2,18 +2,9 @@
 
 import {useProvider, ACTIONS} from "@/contexts/context";
 import * as logic from "./logic"
-import {useState, useEffect} from "react";
+import {useState, useEffect, useReducer} from "react";
 import {Header} from "@/components"
-
-function NutrientBox({title, info}: {title: string, info: string}) {
-  return (
-    <div className="flex justify-center items-center w-full items-center flex-col border-2 rounded p-4">
-      <span>{title}</span>
-      <br />
-      <span>{info}</span>
-    </div>
-  )
-}
+import Stats from "./stats";
 
 function calculateDisplayValues(state: any) {
   let bmr: number = logic.calculateBMR(
@@ -31,9 +22,24 @@ function calculateDisplayValues(state: any) {
   return {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams};
 }
 
-function Display() {
+const EntryActions = {
+  ADD: "add entry",
+}
+
+function reducer(entries: any, action: any) {
+  switch(action.type) {
+    case EntryActions.ADD:
+      entries.push(action.payload.value)
+    default: return entries;
+  }
+}
+
+export default function Plan() {
   const {state, dispatch} = useProvider() || {};
   const [bmr, setBMR] = useState(0);
+  const [entryData, setEntryData] = useState({title: "", protein: "", fats: "", carbs: ""});
+  const [entries, act] = useReducer(reducer, [])
+
   useEffect(() => {
     const {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams} = calculateDisplayValues(state);
     dispatch({type: ACTIONS.SET_CALORIES, payload: {value: caloricNeeds}});
@@ -42,23 +48,22 @@ function Display() {
     dispatch({type: ACTIONS.SET_FATS, payload: {value: fatGrams}});
     setBMR(bmr);
   }, [state, dispatch])
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      <NutrientBox title="Basal Metabolic Rate (BMR)" info={bmr.toString()}/>
-      <NutrientBox title="Caloric Needs" info={state.userMacros.calories.toString()}/>
-      <NutrientBox title="Protein" info={`${state.userMacros.protein.toString()} grams`}/>
-      <NutrientBox title="Carbohydrates" info={`${state.userMacros.carbs.toString()} grams`}/>
-      <NutrientBox title="Fats" info={`${state.userMacros.fats.toString()} grams`}/>
-    </div>
-  )
+
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    act({type: EntryActions.ADD, payload: {value: {entryData}} })
 }
 
-export default function Plan() {
-  const {state} = useProvider() || {};
   return (
     <div className={state.isDarkTheme ? "bg-dark text-white h-screen" : "bg-white text-dark-text h-screen"}>
       <Header />
-      <Display />
+      <Stats bmr={bmr} calories={state.userMacros.calories} protein={state.userMacros.protein} carbs={state.userMacros.carbs} fats={state.userMacros.fats}/>
+      <form onSubmit={handleSubmit} className="flex justify-center gap-4 my-2">
+        <input className="" type="text" placeholder="name"    onChange={e => setEntryData({...entryData, title: e.target.value})}/>
+        <input className="" type="text" placeholder="protein" onChange={e => setEntryData({...entryData, protein: e.target.value})}/>
+        <input className="" type="text" placeholder="fats"    onChange={e => setEntryData({...entryData, fats: e.target.value})}/>
+        <input className="" type="text" placeholder="carbs"   onChange={e => setEntryData({...entryData, carbs: e.target.value})}/>
+      </form>
     </div>
   )
 }
