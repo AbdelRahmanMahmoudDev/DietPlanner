@@ -7,7 +7,7 @@ import {Header} from "@/components"
 
 function NutrientBox({title, info}: {title: string, info: string}) {
   return (
-    <div className="flex justify-center items-center flex-col border-2 w-fit rounded p-4">
+    <div className="flex justify-center items-center w-full items-center flex-col border-2 rounded p-4">
       <span>{title}</span>
       <br />
       <span>{info}</span>
@@ -27,7 +27,7 @@ function calculateDisplayValues(state: any) {
     goal: state.userInput.goal}, bmr);
 
   const {proteinGrams, carbGrams, fatGrams} = logic.calculateMacros(state.userInput.weight, caloricNeeds, state.isMetric);
-  
+
     return {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams};
 }
 
@@ -37,15 +37,15 @@ function Display() {
   useEffect(() => {
     const {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams} = calculateDisplayValues(state);
     setDisplayData({_bmr: bmr, _caloricNeeds: caloricNeeds, _protein: proteinGrams, _carbs: carbGrams, _fats: fatGrams});
-  }, [])
+  }, [state])
   return (
-    <>
-    <NutrientBox title="Basal Metabolic Rate (BMR)" info={displayData._bmr.toString()}/>
-    <NutrientBox title="Caloric Needs" info={displayData._caloricNeeds.toString()}/>
-    <NutrientBox title="Protein" info={`${displayData._protein.toString()} grams`}/>
-    <NutrientBox title="Carbohydrates" info={`${displayData._carbs.toString()} grams`}/>
-    <NutrientBox title="Fats" info={`${displayData._fats.toString()} grams`}/>
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <NutrientBox title="Basal Metabolic Rate (BMR)" info={displayData._bmr.toString()}/>
+      <NutrientBox title="Caloric Needs" info={displayData._caloricNeeds.toString()}/>
+      <NutrientBox title="Protein" info={`${displayData._protein.toString()} grams`}/>
+      <NutrientBox title="Carbohydrates" info={`${displayData._carbs.toString()} grams`}/>
+      <NutrientBox title="Fats" info={`${displayData._fats.toString()} grams`}/>
+    </div>
   )
 }
 
