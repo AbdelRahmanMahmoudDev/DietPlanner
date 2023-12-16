@@ -34,6 +34,10 @@ export const ACTIONS = {
     SET_GENDER: "set gender",
     SET_ACTIVITY: "set activity",
     SET_GOAL: "set goal",
+    SET_PROTEIN: "set protein",
+    SET_CARBS: "set carbs",
+    SET_FATS: "set fats",
+    SET_CALORIES: "set calories",
 }
 
 const reducer = (state: any, action: any) => {
@@ -108,6 +112,38 @@ const reducer = (state: any, action: any) => {
                     goal: action.payload.value,
                 }
             }
+        case ACTIONS.SET_PROTEIN:
+            return {
+                ...state,
+                userMacros: {
+                    ...state.userMacros,
+                    protein: action.payload.value,
+                }
+            }
+        case ACTIONS.SET_CARBS:
+            return {
+                ...state,
+                userMacros: {
+                    ...state.userMacros,
+                    carbs: action.payload.value,
+                }
+            }
+        case ACTIONS.SET_FATS:
+            return {
+                ...state,
+                userMacros: {
+                    ...state.userMacros,
+                    fats: action.payload.value,
+                }
+            }
+        case ACTIONS.SET_CALORIES:
+        return {
+            ...state,
+            userMacros: {
+                ...state.userMacros,
+                calories: action.payload.value,
+            }
+        }
         default:
             return state;
     }
@@ -127,6 +163,12 @@ export const ContextProvider = ({children}: any) => {
             activityLevel: "",
             goal: "",
         },
+        userMacros: {
+            protein: 0,
+            carbs: 0,
+            fats: 0,
+            calories: 0
+        }
             });
 
 

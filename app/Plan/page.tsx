@@ -1,6 +1,6 @@
 "use client";
 
-import {useProvider, OPTIONS} from "@/contexts/context";
+import {useProvider, ACTIONS} from "@/contexts/context";
 import * as logic from "./logic"
 import {useState, useEffect} from "react";
 import {Header} from "@/components"
@@ -28,23 +28,27 @@ function calculateDisplayValues(state: any) {
 
   const {proteinGrams, carbGrams, fatGrams} = logic.calculateMacros(state.userInput.weight, caloricNeeds, state.isMetric);
 
-    return {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams};
+  return {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams};
 }
 
 function Display() {
-  const {state} = useProvider() || {};
-  const [displayData, setDisplayData] = useState({_bmr: 0, _caloricNeeds: 0, _protein: 0, _carbs: 0, _fats: 0});
+  const {state, dispatch} = useProvider() || {};
+  const [bmr, setBMR] = useState(0);
   useEffect(() => {
     const {bmr, caloricNeeds, proteinGrams, carbGrams, fatGrams} = calculateDisplayValues(state);
-    setDisplayData({_bmr: bmr, _caloricNeeds: caloricNeeds, _protein: proteinGrams, _carbs: carbGrams, _fats: fatGrams});
-  }, [state])
+    dispatch({type: ACTIONS.SET_CALORIES, payload: {value: caloricNeeds}});
+    dispatch({type: ACTIONS.SET_PROTEIN, payload: {value: proteinGrams}});
+    dispatch({type: ACTIONS.SET_CARBS, payload: {value: carbGrams}});
+    dispatch({type: ACTIONS.SET_FATS, payload: {value: fatGrams}});
+    setBMR(bmr);
+  }, [state, dispatch])
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      <NutrientBox title="Basal Metabolic Rate (BMR)" info={displayData._bmr.toString()}/>
-      <NutrientBox title="Caloric Needs" info={displayData._caloricNeeds.toString()}/>
-      <NutrientBox title="Protein" info={`${displayData._protein.toString()} grams`}/>
-      <NutrientBox title="Carbohydrates" info={`${displayData._carbs.toString()} grams`}/>
-      <NutrientBox title="Fats" info={`${displayData._fats.toString()} grams`}/>
+      <NutrientBox title="Basal Metabolic Rate (BMR)" info={bmr.toString()}/>
+      <NutrientBox title="Caloric Needs" info={state.userMacros.calories.toString()}/>
+      <NutrientBox title="Protein" info={`${state.userMacros.protein.toString()} grams`}/>
+      <NutrientBox title="Carbohydrates" info={`${state.userMacros.carbs.toString()} grams`}/>
+      <NutrientBox title="Fats" info={`${state.userMacros.fats.toString()} grams`}/>
     </div>
   )
 }
