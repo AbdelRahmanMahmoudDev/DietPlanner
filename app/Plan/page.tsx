@@ -57,21 +57,31 @@ export default function Plan() {
     console.log(entries)
 }
 
+function getTableClasses(isDarkTheme: boolean, index: number): string {
+  let result: string = "";
+  if (isDarkTheme) {
+    result = index % 2 == 0 ? 'bg-dark' : 'bg-[#525151]';
+  } else {
+    result = index % 2 == 0 ? 'bg-gray-100' : 'bg-gray-200';
+  }
+  return result;
+}
+
   return (
     <div className={state.isDarkTheme ? "bg-dark text-white h-screen" : "bg-white text-dark-text h-screen"}>
       <Header />
       <Stats bmr={bmr} calories={state.userMacros.calories} protein={state.userMacros.protein} carbs={state.userMacros.carbs} fats={state.userMacros.fats}/>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 justify-center gap-4 mx-2 my-2 ">
-        <input id="setName" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-dark text-white placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="name"       onChange={e => setEntryData({...entryData, title: e.target.value})} value={entryData.title}/>
-        <input id="setProtein" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-dark text-white placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="protein" onChange={e => setEntryData({...entryData, protein: e.target.value})} value={entryData.protein}/>
-        <input id="setFat" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-dark text-white placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="fats"    onChange={e => setEntryData({...entryData, fats: e.target.value})} value={entryData.fats}/>
-        <input id="setCarb" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-dark text-white placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="carbs"   onChange={e => setEntryData({...entryData, carbs: e.target.value})} value={entryData.carbs}/>
+        <input id="setName" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="name"       onChange={e => setEntryData({...entryData, title: e.target.value})} value={entryData.title}/>
+        <input id="setProtein" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="protein" onChange={e => setEntryData({...entryData, protein: e.target.value})} value={entryData.protein}/>
+        <input id="setFat" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="fats"    onChange={e => setEntryData({...entryData, fats: e.target.value})} value={entryData.fats}/>
+        <input id="setCarb" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="carbs"   onChange={e => setEntryData({...entryData, carbs: e.target.value})} value={entryData.carbs}/>
         <input id="doSubmit" type="submit" className="cursor-pointer border border-gray-300 rounded " />
       </form>
       <ul className="odd:bg-white">
         {entries.map((entry: any, index: any) => {
           return (
-              <FoodEntry key={index} name={entry.title} protein={entry.protein} fats={entry.fats} carbs={entry.carbs} customClasses={index % 2 == 0 ? 'bg-dark' : 'bg-[#525151]'}></FoodEntry>
+              <FoodEntry key={index} name={entry.title} protein={entry.protein} fats={entry.fats} carbs={entry.carbs} customClasses={getTableClasses(state.isDarkTheme, index)}></FoodEntry>
           )
         })}
       </ul>
