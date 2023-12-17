@@ -54,6 +54,7 @@ export default function Plan() {
     e.preventDefault();
     console.log(entries)
     act({type: EntryActions.ADD, payload: {value: {...entryData}}})
+    setEntryData({title: "", protein: "", fats: "", carbs: ""})
     console.log(entries)
 }
 
