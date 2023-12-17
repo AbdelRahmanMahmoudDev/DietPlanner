@@ -52,10 +52,11 @@ export default function Plan() {
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    console.log(entries)
-    act({type: EntryActions.ADD, payload: {value: {...entryData}}})
-    setEntryData({title: "", protein: "", fats: "", carbs: ""})
-    console.log(entries)
+    act({type: EntryActions.ADD, payload: {value: {...entryData}}});
+    state.userMacros.protein = state.userMacros.protein < parseInt(entryData.protein) ? 0 : state.userMacros.protein - parseInt(entryData.protein);
+    state.userMacros.carbs = state.userMacros.carbs < parseInt(entryData.carbs) ? 0 : state.userMacros.carbs - parseInt(entryData.carbs);
+    state.userMacros.fats = state.userMacros.fats < parseInt(entryData.fats) ? 0 : state.userMacros.fats - parseInt(entryData.fats);
+    setEntryData({title: "", protein: "", fats: "", carbs: ""});
 }
 
 function getTableClasses(isDarkTheme: boolean, index: number): string {
