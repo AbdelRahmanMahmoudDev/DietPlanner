@@ -76,7 +76,7 @@ function getTableClasses(isDarkTheme: boolean, index: number): string {
         <input id="setProtein" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="protein" onChange={e => setEntryData({...entryData, protein: e.target.value})} value={entryData.protein}/>
         <input id="setFat" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="fats"    onChange={e => setEntryData({...entryData, fats: e.target.value})} value={entryData.fats}/>
         <input id="setCarb" className={state.isDarkTheme ? "bg-white text-dark-text placeholder:px-2 mt-5 md:mt-0" : "bg-gray-300 text-gray-500 placeholder:px-2 mt-5 md:mt-0"} type="text" placeholder="carbs"   onChange={e => setEntryData({...entryData, carbs: e.target.value})} value={entryData.carbs}/>
-        <input id="doSubmit" type="submit" className="cursor-pointer border border-gray-300 rounded " />
+        <input id="doSubmit" value="Add food entry" aria-label="Add food entry" type="submit" className="cursor-pointer border border-gray-300 rounded " />
       </form>
       <ul className="odd:bg-white">
         {entries.map((entry: any, index: any) => {

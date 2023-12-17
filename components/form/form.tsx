@@ -45,8 +45,8 @@ export function Form(){
                     <form onSubmit={e => onFinishStageOne(e)} className="flex flex-col justify-between min-w-[280px] w-[280px] min-h-[350px] border-2 border-black outline-none p-4" method="GET" action="">
                         <span className="mx-auto">[1 / 3]</span>
                         <fieldset className="flex justify-between">
-                            <button className={!state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_US})} type="button">US System</button>
-                            <button className={state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_METRIC})} type="button">Metric System</button>
+                            <button aria-label="Use US system for measurements" className={!state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_US})} type="button">US System</button>
+                            <button aria-label="Use Metric system for measurements" className={state.isMetric ? selectedButtonClasses : buttonClasses} onClick={e => dispatch({type: ACTIONS.SET_METRIC})} type="button">Metric System</button>
                         </fieldset>
                         <label className="block" htmlFor="inWeight">Weight<span className="text-[#f00]">*</span></label>
                         <input required className="border-2 border-black focus:outline-none placeholder:px-2 text-dark-text" id="inWeight" onChange={e => dispatch({type: ACTIONS.SET_WEIGHT, payload: {value: e.target.value}})} type="number" step="0.1" placeholder={state.isMetric ? "kgs" : "pounds"}/>
@@ -91,7 +91,7 @@ export function Form(){
                             </section>
                         </fieldset>
                         <fieldset className="flex justify-center">
-                            <button className={buttonClasses} type="submit">Next</button>
+                            <button aria-label="Go to next section" className={buttonClasses} type="submit">Next</button>
                         </fieldset>
                     </form>
                 </main>
@@ -137,8 +137,8 @@ export function Form(){
                     </fieldset>
                     <span className="block text-[#f00]">*Required</span>
                     <fieldset className="flex justify-between">
-                            <button className={buttonClasses} type="submit">Next</button>
-                            <button className={buttonClasses} onClick={e => setStage(STAGES.FIRST_STAGE)} type="button">Back</button>
+                            <button aria-label="Go to next section" className={buttonClasses} type="submit">Next</button>
+                            <button aria-label="Go to previous section" className={buttonClasses} onClick={e => setStage(STAGES.FIRST_STAGE)} type="button">Back</button>
                     </fieldset>
                 </form>
             </main>
@@ -172,8 +172,8 @@ export function Form(){
                     </fieldset>
                     <span className="block text-[#f00]">*Required</span>
                     <fieldset className="flex justify-between">
-                            <button className={buttonClasses} type="submit">Finish</button>
-                            <button className={buttonClasses} onClick={e => setStage(STAGES.SECOND_STAGE)} type="button">Back</button>
+                            <button aria-label="Finish" className={buttonClasses} type="submit">Finish</button>
+                            <button aria-label="Go to previous section" className={buttonClasses} onClick={e => setStage(STAGES.SECOND_STAGE)} type="button">Back</button>
 
                     </fieldset>
                 </form>
@@ -189,7 +189,7 @@ export function Form(){
                     <p>gender: {state.userInput.gender}</p>
                     <p>activity level: {state.userInput.activityLevel}</p>
                     <p>goal: {state.userInput.goal}</p>
-                    <button className={buttonClasses}><Link href="/Plan">Create your plan</Link></button>
+                    <button aria-label="Create your plan" className={buttonClasses}><Link href="/Plan">Create your plan</Link></button>
                 </section>
             )
     }
